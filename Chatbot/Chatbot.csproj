@@ -182,13 +182,28 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="ChatbotContext.cs" />
     <Compile Include="ChatbotHub.cs" />
+    <Compile Include="Controllers\FactsController.cs" />
+    <Compile Include="Controllers\HistoryStandardsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ParticipantsController.cs" />
+    <Compile Include="Controllers\PathsController.cs" />
+    <Compile Include="Controllers\ReservationsController.cs" />
+    <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\RulesController.cs" />
+    <Compile Include="Controllers\StandardsController.cs" />
+    <Compile Include="Controllers\StopsController.cs" />
+    <Compile Include="Controllers\TravelsController.cs" />
+    <Compile Include="Controllers\VehiclesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201904261831450_1.cs" />
     <Compile Include="Migrations\201904261831450_1.Designer.cs">
       <DependentUpon>201904261831450_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904261905153_2.cs" />
+    <Compile Include="Migrations\201904261905153_2.Designer.cs">
+      <DependentUpon>201904261905153_2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Path.cs" />
@@ -244,6 +259,61 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Chat.cshtml" />
+    <Content Include="Views\Facts\Create.cshtml" />
+    <Content Include="Views\Facts\Delete.cshtml" />
+    <Content Include="Views\Facts\Details.cshtml" />
+    <Content Include="Views\Facts\Edit.cshtml" />
+    <Content Include="Views\Facts\Index.cshtml" />
+    <Content Include="Views\HistoryStandards\Create.cshtml" />
+    <Content Include="Views\HistoryStandards\Delete.cshtml" />
+    <Content Include="Views\HistoryStandards\Details.cshtml" />
+    <Content Include="Views\HistoryStandards\Edit.cshtml" />
+    <Content Include="Views\HistoryStandards\Index.cshtml" />
+    <Content Include="Views\Participants\Create.cshtml" />
+    <Content Include="Views\Participants\Delete.cshtml" />
+    <Content Include="Views\Participants\Details.cshtml" />
+    <Content Include="Views\Participants\Edit.cshtml" />
+    <Content Include="Views\Participants\Index.cshtml" />
+    <Content Include="Views\Paths\Create.cshtml" />
+    <Content Include="Views\Paths\Delete.cshtml" />
+    <Content Include="Views\Paths\Details.cshtml" />
+    <Content Include="Views\Paths\Edit.cshtml" />
+    <Content Include="Views\Paths\Index.cshtml" />
+    <Content Include="Views\Reservations\Create.cshtml" />
+    <Content Include="Views\Reservations\Delete.cshtml" />
+    <Content Include="Views\Reservations\Details.cshtml" />
+    <Content Include="Views\Reservations\Edit.cshtml" />
+    <Content Include="Views\Reservations\Index.cshtml" />
+    <Content Include="Views\Roles\Create.cshtml" />
+    <Content Include="Views\Roles\Delete.cshtml" />
+    <Content Include="Views\Roles\Details.cshtml" />
+    <Content Include="Views\Roles\Edit.cshtml" />
+    <Content Include="Views\Roles\Index.cshtml" />
+    <Content Include="Views\Rules\Create.cshtml" />
+    <Content Include="Views\Rules\Delete.cshtml" />
+    <Content Include="Views\Rules\Details.cshtml" />
+    <Content Include="Views\Rules\Edit.cshtml" />
+    <Content Include="Views\Rules\Index.cshtml" />
+    <Content Include="Views\Standards\Create.cshtml" />
+    <Content Include="Views\Standards\Delete.cshtml" />
+    <Content Include="Views\Standards\Details.cshtml" />
+    <Content Include="Views\Standards\Edit.cshtml" />
+    <Content Include="Views\Standards\Index.cshtml" />
+    <Content Include="Views\Stops\Create.cshtml" />
+    <Content Include="Views\Stops\Delete.cshtml" />
+    <Content Include="Views\Stops\Details.cshtml" />
+    <Content Include="Views\Stops\Edit.cshtml" />
+    <Content Include="Views\Stops\Index.cshtml" />
+    <Content Include="Views\Travels\Create.cshtml" />
+    <Content Include="Views\Travels\Delete.cshtml" />
+    <Content Include="Views\Travels\Details.cshtml" />
+    <Content Include="Views\Travels\Edit.cshtml" />
+    <Content Include="Views\Travels\Index.cshtml" />
+    <Content Include="Views\Vehicles\Create.cshtml" />
+    <Content Include="Views\Vehicles\Delete.cshtml" />
+    <Content Include="Views\Vehicles\Details.cshtml" />
+    <Content Include="Views\Vehicles\Edit.cshtml" />
+    <Content Include="Views\Vehicles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -264,6 +334,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201904261831450_1.resx">
       <DependentUpon>201904261831450_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904261905153_2.resx">
+      <DependentUpon>201904261905153_2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
