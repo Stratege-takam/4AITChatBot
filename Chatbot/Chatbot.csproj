@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -25,6 +26,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -182,15 +184,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="ChatbotContext.cs" />
     <Compile Include="ChatbotHub.cs" />
+    <Compile Include="Controllers\DiagnosticsController.cs" />
     <Compile Include="Controllers\FactsController.cs" />
-    <Compile Include="Controllers\HistoryStandardsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ParticipantsController.cs" />
     <Compile Include="Controllers\PathsController.cs" />
     <Compile Include="Controllers\ReservationsController.cs" />
-    <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\RuleFactsController.cs" />
     <Compile Include="Controllers\RulesController.cs" />
-    <Compile Include="Controllers\StandardsController.cs" />
     <Compile Include="Controllers\StopsController.cs" />
     <Compile Include="Controllers\TravelsController.cs" />
     <Compile Include="Controllers\VehiclesController.cs" />
@@ -205,32 +205,110 @@
     <Compile Include="Migrations\201904261905153_2.Designer.cs">
       <DependentUpon>201904261905153_2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904270955539_3.cs" />
+    <Compile Include="Migrations\201904270955539_3.Designer.cs">
+      <DependentUpon>201904270955539_3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904280921448_5.cs" />
+    <Compile Include="Migrations\201904280921448_5.Designer.cs">
+      <DependentUpon>201904280921448_5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904281008147_6.cs" />
+    <Compile Include="Migrations\201904281008147_6.Designer.cs">
+      <DependentUpon>201904281008147_6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904281046494_7.cs" />
+    <Compile Include="Migrations\201904281046494_7.Designer.cs">
+      <DependentUpon>201904281046494_7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904281135541_8.cs" />
+    <Compile Include="Migrations\201904281135541_8.Designer.cs">
+      <DependentUpon>201904281135541_8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904281158303_9.cs" />
+    <Compile Include="Migrations\201904281158303_9.Designer.cs">
+      <DependentUpon>201904281158303_9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904282306148_10.cs" />
+    <Compile Include="Migrations\201904282306148_10.Designer.cs">
+      <DependentUpon>201904282306148_10.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904282327032_11.cs" />
+    <Compile Include="Migrations\201904282327032_11.Designer.cs">
+      <DependentUpon>201904282327032_11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904282341401_12.cs" />
+    <Compile Include="Migrations\201904282341401_12.Designer.cs">
+      <DependentUpon>201904282341401_12.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904282350178_13.cs" />
+    <Compile Include="Migrations\201904282350178_13.Designer.cs">
+      <DependentUpon>201904282350178_13.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904282357116_14.cs" />
+    <Compile Include="Migrations\201904282357116_14.Designer.cs">
+      <DependentUpon>201904282357116_14.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904290008525_15.cs" />
+    <Compile Include="Migrations\201904290008525_15.Designer.cs">
+      <DependentUpon>201904290008525_15.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904290027583_16.cs" />
+    <Compile Include="Migrations\201904290027583_16.Designer.cs">
+      <DependentUpon>201904290027583_16.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Path.cs" />
-    <Compile Include="Models\HistoryStandard.cs" />
-    <Compile Include="Models\Participant.cs" />
     <Compile Include="Models\Reservation.cs" />
-    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\SE\Diagnostic.cs" />
     <Compile Include="Models\SE\Fact.cs" />
+    <Compile Include="Models\SE\Response.cs" />
     <Compile Include="Models\SE\Rule.cs" />
-    <Compile Include="Models\Standard.cs" />
+    <Compile Include="Models\SE\RuleFact.cs" />
     <Compile Include="Models\Stop.cs" />
+    <Compile Include="Models\TravelHelp.cs" />
     <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Models\Travel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utils\Chatbot.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\image.jpg" />
+    <Content Include="Content\img\blockchain-transport.jpg" />
+    <Content Include="Content\img\DXn1eGPXUAEQH9z.jpg" />
+    <Content Include="Content\img\intelligence-artificielle.jpg" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -244,6 +322,14 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -259,46 +345,31 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Chat.cshtml" />
-    <Content Include="Views\Facts\Create.cshtml" />
-    <Content Include="Views\Facts\Delete.cshtml" />
-    <Content Include="Views\Facts\Details.cshtml" />
-    <Content Include="Views\Facts\Edit.cshtml" />
-    <Content Include="Views\Facts\Index.cshtml" />
-    <Content Include="Views\HistoryStandards\Create.cshtml" />
-    <Content Include="Views\HistoryStandards\Delete.cshtml" />
-    <Content Include="Views\HistoryStandards\Details.cshtml" />
-    <Content Include="Views\HistoryStandards\Edit.cshtml" />
-    <Content Include="Views\HistoryStandards\Index.cshtml" />
-    <Content Include="Views\Participants\Create.cshtml" />
-    <Content Include="Views\Participants\Delete.cshtml" />
-    <Content Include="Views\Participants\Details.cshtml" />
-    <Content Include="Views\Participants\Edit.cshtml" />
-    <Content Include="Views\Participants\Index.cshtml" />
     <Content Include="Views\Paths\Create.cshtml" />
     <Content Include="Views\Paths\Delete.cshtml" />
     <Content Include="Views\Paths\Details.cshtml" />
     <Content Include="Views\Paths\Edit.cshtml" />
     <Content Include="Views\Paths\Index.cshtml" />
-    <Content Include="Views\Reservations\Create.cshtml" />
-    <Content Include="Views\Reservations\Delete.cshtml" />
-    <Content Include="Views\Reservations\Details.cshtml" />
-    <Content Include="Views\Reservations\Edit.cshtml" />
-    <Content Include="Views\Reservations\Index.cshtml" />
-    <Content Include="Views\Roles\Create.cshtml" />
-    <Content Include="Views\Roles\Delete.cshtml" />
-    <Content Include="Views\Roles\Details.cshtml" />
-    <Content Include="Views\Roles\Edit.cshtml" />
-    <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\Rules\Create.cshtml" />
     <Content Include="Views\Rules\Delete.cshtml" />
     <Content Include="Views\Rules\Details.cshtml" />
     <Content Include="Views\Rules\Edit.cshtml" />
     <Content Include="Views\Rules\Index.cshtml" />
-    <Content Include="Views\Standards\Create.cshtml" />
-    <Content Include="Views\Standards\Delete.cshtml" />
-    <Content Include="Views\Standards\Details.cshtml" />
-    <Content Include="Views\Standards\Edit.cshtml" />
-    <Content Include="Views\Standards\Index.cshtml" />
+    <Content Include="Views\Facts\Create.cshtml" />
+    <Content Include="Views\Facts\Delete.cshtml" />
+    <Content Include="Views\Facts\Details.cshtml" />
+    <Content Include="Views\Facts\Edit.cshtml" />
+    <Content Include="Views\Facts\Index.cshtml" />
+    <Content Include="Views\RuleFacts\Create.cshtml" />
+    <Content Include="Views\RuleFacts\Delete.cshtml" />
+    <Content Include="Views\RuleFacts\Details.cshtml" />
+    <Content Include="Views\RuleFacts\Edit.cshtml" />
+    <Content Include="Views\RuleFacts\Index.cshtml" />
+    <Content Include="Views\Reservations\Create.cshtml" />
+    <Content Include="Views\Reservations\Delete.cshtml" />
+    <Content Include="Views\Reservations\Details.cshtml" />
+    <Content Include="Views\Reservations\Edit.cshtml" />
+    <Content Include="Views\Reservations\Index.cshtml" />
     <Content Include="Views\Stops\Create.cshtml" />
     <Content Include="Views\Stops\Delete.cshtml" />
     <Content Include="Views\Stops\Details.cshtml" />
@@ -314,19 +385,25 @@
     <Content Include="Views\Vehicles\Details.cshtml" />
     <Content Include="Views\Vehicles\Edit.cshtml" />
     <Content Include="Views\Vehicles\Index.cshtml" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Diagnostics\Create.cshtml" />
+    <Content Include="Views\Diagnostics\Delete.cshtml" />
+    <Content Include="Views\Diagnostics\Details.cshtml" />
+    <Content Include="Views\Diagnostics\Edit.cshtml" />
+    <Content Include="Views\Diagnostics\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
@@ -338,12 +415,58 @@
     <EmbeddedResource Include="Migrations\201904261905153_2.resx">
       <DependentUpon>201904261905153_2.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904270955539_3.resx">
+      <DependentUpon>201904270955539_3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904280921448_5.resx">
+      <DependentUpon>201904280921448_5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904281008147_6.resx">
+      <DependentUpon>201904281008147_6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904281046494_7.resx">
+      <DependentUpon>201904281046494_7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904281135541_8.resx">
+      <DependentUpon>201904281135541_8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904281158303_9.resx">
+      <DependentUpon>201904281158303_9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904282306148_10.resx">
+      <DependentUpon>201904282306148_10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904282327032_11.resx">
+      <DependentUpon>201904282327032_11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904282341401_12.resx">
+      <DependentUpon>201904282341401_12.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904282350178_13.resx">
+      <DependentUpon>201904282350178_13.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904282357116_14.resx">
+      <DependentUpon>201904282357116_14.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904290008525_15.resx">
+      <DependentUpon>201904290008525_15.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904290027583_16.resx">
+      <DependentUpon>201904290027583_16.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">

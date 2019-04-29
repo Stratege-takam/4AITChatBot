@@ -12,6 +12,14 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.Path.Start)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Path.Start)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Type)
         </dt>
 
@@ -25,14 +33,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.CompanyName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.concessionary)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.concessionary)
         </dd>
 
     </dl>

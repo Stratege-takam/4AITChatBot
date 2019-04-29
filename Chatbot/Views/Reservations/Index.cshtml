@@ -9,19 +9,28 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table card">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Participant.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Path.Start)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Standard.Name)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Travel.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Travel.Transport.CompanyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Travel.Transport.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Travel.Transport.Path.Start)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Travel.Transport.Path.End)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Participant)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Standard)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ReversationDate)
@@ -29,25 +38,31 @@
         <th>
             @Html.DisplayNameFor(model => model.TravelCost)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.State)
-        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Participant.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Path.Start)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Standard.Name)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Travel.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.Travel.Transport.CompanyName)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.Travel.Transport.Type)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.Travel.Transport.Path.Start)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.Travel.Transport.Path.End)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Participant)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Standard)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ReversationDate)
@@ -56,12 +71,9 @@
             @Html.DisplayFor(modelItem => item.TravelCost)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.State)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>
     </tr>
 }

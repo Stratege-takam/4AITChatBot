@@ -1,6 +1,12 @@
-﻿body {
+﻿html{
+    height: 100%;
+}
+body {
     padding-top: 50px;
     padding-bottom: 20px;
+    height: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -17,8 +23,38 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+
+
+body {
+    background-image: url('img/image.jpg');
+    height: 100%;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 9;
 }
+.container{
+    height:inherit;
+}
+.main {
+    margin-top: 20px;
+    z-index: 99;
+    height: calc(100% - 20px);
+}
+.main_1, .main_2{
+    height : inherit;
+}
+.card-body{
+    max-height: 600px;
+    overflow-y:auto;
+}
+
+ul li a{
+    color: white !important;
+}
+
+.hide{
+    display:none;
+}
+

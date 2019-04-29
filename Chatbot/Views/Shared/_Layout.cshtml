@@ -1,49 +1,46 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
+<head style="height:100%;">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mon application ASP.NET</title>
+    <title>@ViewBag.Title - Chatbot transport</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Nom de l'application", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Facts", "Index", "Facts")</li>
-                    <li>@Html.ActionLink("Rules", "Index", "Rules")</li>
-                    <li>@Html.ActionLink("Vehicles", "Index", "Vehicles")</li>
-                    <li>@Html.ActionLink("Standards", "Index", "Standards")</li>
-                    <li>@Html.ActionLink("History Standard", "Index", "HistoryStandards")</li>
-                    <li>@Html.ActionLink("Participants", "Index", "Participants")</li>
-                    <li>@Html.ActionLink("Paths", "Index", "Paths")</li>
-                    <li>@Html.ActionLink("Roles", "Index", "Roles")</li>
-                    <li>@Html.ActionLink("Stops", "Index", "Stops")</li>
-                    <li>@Html.ActionLink("Travels", "Index", "Travels")</li>
-                    <li>@Html.ActionLink("Reservations", "Index", "Reservations")</li>
-                </ul>
-            </div>
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top">
+        <a class="navbar-brand text-white" href="@Url.Action("Index", "Home")">Chatbot transport</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto navbar-dark">
+                <li class="nav-item active">
+                    <a class="nav-link" href="@Url.Action("Index", "Home")">Accueil <span class="sr-only">(current)</span></a>
+                </li>
+                <li>@Html.ActionLink(linkText: "Diagnostics", actionName: "Index", controllerName: "Diagnostics", routeValues: new { }, htmlAttributes: new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink(linkText: "Facts", actionName: "Index", controllerName: "Facts", routeValues: new { }, htmlAttributes: new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink(linkText: "Rules", actionName: "Index", controllerName: "Rules", routeValues: new { }, htmlAttributes: new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink(linkText: "RuleFact", actionName: "Index", controllerName: "RuleFacts", routeValues: new { }, htmlAttributes: new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink(linkText: "Vehicles", actionName: "Index", controllerName: "Vehicles", routeValues: new { }, htmlAttributes: new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink(linkText: "Paths", actionName: "Index", controllerName: "Paths", routeValues: new { }, htmlAttributes: new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink(linkText: "Stops", actionName: "Index", controllerName: "Stops", routeValues: new { }, htmlAttributes: new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink(linkText: "Travels", actionName: "Index", controllerName: "Travels", routeValues: new { }, htmlAttributes: new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink(linkText: "Reservations", actionName: "Index", controllerName: "Reservations", routeValues: new { }, htmlAttributes: new { @class = "nav-link" })</li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content">
+        <div class="container body-content ">
+            @RenderBody()
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

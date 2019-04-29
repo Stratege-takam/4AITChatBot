@@ -19,8 +19,118 @@ namespace Chatbot.Controllers
         // GET: Stops
         public async Task<ActionResult> Index()
         {
-            var stops = db.Stops.Include(s => s.Path).Include(s => s.Vehicle);
-            return View(await stops.ToListAsync());
+            /*
+            foreach (var item in db.Stops.ToList())
+            {
+                db.Stops.Remove(item);
+                db.SaveChanges();
+            }
+            var listdest = new List<List<string>>()
+            {
+                new List<String>()
+                {
+                    "LIERS", "MILMORT","HERSTAL","LIEGE-PALAIS","LIEGE-JONFOSSE"
+                    // "LIEGE-JONFOSSE","LIEGE-GUILEMINS",
+                    //  "SERAING","OUGREE","FLEMALLE-HAUTE",
+                },
+                new List<String>()
+                {
+                    "CHARLEROI-SUD", "JAMIOULX","BEIGNEE","HAM-SUR-HEURE","COUR-SUR-HEURE"
+                    //"COUR-SUR-HEURE","BERZEE","PRY", "WALCOURT","YVES-GOMEZEE",
+                    //"PHILIPPEVILLE","NARIEMBOURG","COUVIN",
+                },
+                new List<String>()
+                {
+                    "POPERINGE", "IEPER","COMINES","MENEN","WEVELGEM"
+                    //"WEVELGEM","BISSEGEM","COURTRAI", "MOUSCRON","HERSEAUX",
+                   // "FROYENNES","TOURNAI",
+                },
+                new List<String>()
+                {
+                    "GERAARDSBERGEN", "ACREN","LESSINES","HOURAING","PAPIGNIES"
+                   // "PAPIGNIES","REBAIX","ATH", "MAFFLE","MEVERGNIES-ATTRE",
+                    //"BRUGELETTE","CAMBRON-CASTEAU","LENS",
+                    //"JURBISE","ERBISOEUL","GHLIN","MONS"
+                },
+                new List<String>()
+                {
+                    "BRAINE-L’ALLEUD", "WATERLOO","BRUXELLES","FOREST-MIDI", "RUISBROEK"
+                   // "RUISBROEK","LOT","BUIZINGEN", "HALLE","LEMBEEK",
+                   // "TUBIZE","HENNUYERES","BRAINE-LE-COMTE",
+                },
+                new List<String>()
+                {
+                    "LEUVEN", "HEVERLEE","OUD-HEVERLEE","SINT-JORIS-WEERT","PECROT"
+                   // "PECROT","FLORIVAL","ARCHENNES", "GASTUCHE","BASSE-WAVRE",
+                   // "BIERGES","WAVRE","OTTIGNIES",
+                }
+            };
+
+
+            var stops = new List<Stop>();
+            foreach (var listdestination in listdest)
+            {
+                foreach (var item in listdestination)
+                {
+                    var i = 0;
+                    for (int j = listdestination.IndexOf(item)+1; j < listdestination.Count(); j++)
+                    {
+                        var item1 = listdestination[j];
+                        if (item != item1)
+                        {
+                            var path = new Path()
+                            {
+                                Distance = (new Random()).Next(10, 200),
+                                End = item1,
+                                Start = item
+                            };
+                            stops = new List<Stop>();
+                            
+                            for (int k = i; k < j + 1; k++)
+                            {
+                                var time = 15;
+                                var timeend = 30;
+                                for (int p = k+1; p < j + 1; p++)
+                                {
+
+
+                                    if (listdestination[k] != listdestination[p])
+                                    {
+                                        var stop = new Stop()
+                                        {
+                                            Path = path,
+                                        };
+                                        stops.Add(stop);
+
+                                        time += 15;
+                                        timeend += 15;
+                                    }
+                                }
+                            }
+
+                            if (stops.Count > 0)
+                            {
+                                foreach (var item3 in stops)
+                                {
+                                    db.Stops.Add(item3);
+                                    db.SaveChanges();
+                                }
+                            }
+                            else
+                            {
+                                db.Paths.Add(path);
+                                db.SaveChanges();
+                            }
+
+                        }
+                    }
+                    i++;
+
+                }
+            }
+            */
+            var stoprs = db.Stops; //.Include(s => s.Path);
+            return View(await stoprs.ToListAsync());
         }
 
         // GET: Stops/Details/5
@@ -42,7 +152,6 @@ namespace Chatbot.Controllers
         public ActionResult Create()
         {
             ViewBag.PathId = new SelectList(db.Paths, "Id", "Start");
-            ViewBag.VehicleId = new SelectList(db.Vehicles, "Id", "Type");
             return View();
         }
 
@@ -51,7 +160,7 @@ namespace Chatbot.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,VehicleId,PathId,Cost,StartTime,EndTime")] Stop stop)
+        public async Task<ActionResult> Create([Bind(Include = "Id,PathId")] Stop stop)
         {
             if (ModelState.IsValid)
             {
@@ -61,7 +170,6 @@ namespace Chatbot.Controllers
             }
 
             ViewBag.PathId = new SelectList(db.Paths, "Id", "Start", stop.PathId);
-            ViewBag.VehicleId = new SelectList(db.Vehicles, "Id", "Type", stop.VehicleId);
             return View(stop);
         }
 
@@ -78,7 +186,6 @@ namespace Chatbot.Controllers
                 return HttpNotFound();
             }
             ViewBag.PathId = new SelectList(db.Paths, "Id", "Start", stop.PathId);
-            ViewBag.VehicleId = new SelectList(db.Vehicles, "Id", "Type", stop.VehicleId);
             return View(stop);
         }
 
@@ -87,7 +194,7 @@ namespace Chatbot.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,VehicleId,PathId,Cost,StartTime,EndTime")] Stop stop)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,PathId")] Stop stop)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +203,6 @@ namespace Chatbot.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.PathId = new SelectList(db.Paths, "Id", "Start", stop.PathId);
-            ViewBag.VehicleId = new SelectList(db.Vehicles, "Id", "Type", stop.VehicleId);
             return View(stop);
         }
 

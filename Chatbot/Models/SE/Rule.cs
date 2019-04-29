@@ -12,6 +12,6 @@ namespace Chatbot.Models.SE
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public ICollection<Fact> Facts { get; set; }
+        public virtual ICollection<RuleFact> RuleFacts { get; set; }
     }
 }

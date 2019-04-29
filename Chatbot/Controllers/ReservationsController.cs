@@ -19,7 +19,7 @@ namespace Chatbot.Controllers
         // GET: Reservations
         public async Task<ActionResult> Index()
         {
-            var reservations = db.Reservations.Include(r => r.Participant).Include(r => r.Path).Include(r => r.Standard).Include(r => r.Travel);
+            var reservations = db.Reservations; //.Include(r => r.Travel);
             return View(await reservations.ToListAsync());
         }
 
@@ -41,9 +41,6 @@ namespace Chatbot.Controllers
         // GET: Reservations/Create
         public ActionResult Create()
         {
-            ViewBag.ParticipantId = new SelectList(db.Participants, "Id", "Name");
-            ViewBag.PathId = new SelectList(db.Paths, "Id", "Start");
-            ViewBag.StandardId = new SelectList(db.Standards, "Id", "Name");
             ViewBag.TravelId = new SelectList(db.Travels, "Id", "Id");
             return View();
         }
@@ -53,7 +50,7 @@ namespace Chatbot.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,ParticipantId,TravelId,StandardId,PathId,ReversationDate,TravelCost,State")] Reservation reservation)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Participant,Standard,TravelId,ReversationDate,TravelCost")] Reservation reservation)
         {
             if (ModelState.IsValid)
             {
@@ -62,9 +59,6 @@ namespace Chatbot.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ParticipantId = new SelectList(db.Participants, "Id", "Name", reservation.ParticipantId);
-            ViewBag.PathId = new SelectList(db.Paths, "Id", "Start", reservation.PathId);
-            ViewBag.StandardId = new SelectList(db.Standards, "Id", "Name", reservation.StandardId);
             ViewBag.TravelId = new SelectList(db.Travels, "Id", "Id", reservation.TravelId);
             return View(reservation);
         }
@@ -81,9 +75,6 @@ namespace Chatbot.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ParticipantId = new SelectList(db.Participants, "Id", "Name", reservation.ParticipantId);
-            ViewBag.PathId = new SelectList(db.Paths, "Id", "Start", reservation.PathId);
-            ViewBag.StandardId = new SelectList(db.Standards, "Id", "Name", reservation.StandardId);
             ViewBag.TravelId = new SelectList(db.Travels, "Id", "Id", reservation.TravelId);
             return View(reservation);
         }
@@ -93,7 +84,7 @@ namespace Chatbot.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,ParticipantId,TravelId,StandardId,PathId,ReversationDate,TravelCost,State")] Reservation reservation)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Participant,Standard,TravelId,ReversationDate,TravelCost")] Reservation reservation)
         {
             if (ModelState.IsValid)
             {
@@ -101,9 +92,6 @@ namespace Chatbot.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ParticipantId = new SelectList(db.Participants, "Id", "Name", reservation.ParticipantId);
-            ViewBag.PathId = new SelectList(db.Paths, "Id", "Start", reservation.PathId);
-            ViewBag.StandardId = new SelectList(db.Standards, "Id", "Name", reservation.StandardId);
             ViewBag.TravelId = new SelectList(db.Travels, "Id", "Id", reservation.TravelId);
             return View(reservation);
         }

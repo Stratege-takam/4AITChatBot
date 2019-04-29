@@ -40,6 +40,11 @@ namespace Chatbot.Controllers
         // GET: Rules/Create
         public ActionResult Create()
         {
+            //for (int i = 1; i < 201; i++)
+            //{
+            //    db.Rules.Add(new Models.SE.Rule() { Name = "R" + i });
+            //    db.SaveChanges();
+            //}
             return View();
         }
 

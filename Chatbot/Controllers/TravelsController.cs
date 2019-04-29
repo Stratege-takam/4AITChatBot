@@ -19,7 +19,7 @@ namespace Chatbot.Controllers
         // GET: Travels
         public async Task<ActionResult> Index()
         {
-            var travels = db.Travels.Include(t => t.Path).Include(t => t.Transport);
+            var travels = db.Travels; // Include(t => t.Transport);
             return View(await travels.ToListAsync());
         }
 
@@ -41,7 +41,6 @@ namespace Chatbot.Controllers
         // GET: Travels/Create
         public ActionResult Create()
         {
-            ViewBag.PathId = new SelectList(db.Paths, "Id", "Start");
             ViewBag.TransportId = new SelectList(db.Vehicles, "Id", "Type");
             return View();
         }
@@ -51,7 +50,7 @@ namespace Chatbot.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,TransportId,PathId,TravelDate")] Travel travel)
+        public async Task<ActionResult> Create([Bind(Include = "Id,TransportId,TravelStart,TravelEnd")] Travel travel)
         {
             if (ModelState.IsValid)
             {
@@ -60,7 +59,6 @@ namespace Chatbot.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.PathId = new SelectList(db.Paths, "Id", "Start", travel.PathId);
             ViewBag.TransportId = new SelectList(db.Vehicles, "Id", "Type", travel.TransportId);
             return View(travel);
         }
@@ -77,7 +75,6 @@ namespace Chatbot.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.PathId = new SelectList(db.Paths, "Id", "Start", travel.PathId);
             ViewBag.TransportId = new SelectList(db.Vehicles, "Id", "Type", travel.TransportId);
             return View(travel);
         }
@@ -87,7 +84,7 @@ namespace Chatbot.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,TransportId,PathId,TravelDate")] Travel travel)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,TransportId,TravelStart,TravelEnd")] Travel travel)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +92,6 @@ namespace Chatbot.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.PathId = new SelectList(db.Paths, "Id", "Start", travel.PathId);
             ViewBag.TransportId = new SelectList(db.Vehicles, "Id", "Type", travel.TransportId);
             return View(travel);
         }

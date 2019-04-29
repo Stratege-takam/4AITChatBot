@@ -19,7 +19,8 @@ namespace Chatbot.Controllers
         // GET: Vehicles
         public async Task<ActionResult> Index()
         {
-            return View(await db.Vehicles.ToListAsync());
+            var vehicles = db.Vehicles.Include(v => v.Path);
+            return View(await vehicles.ToListAsync());
         }
 
         // GET: Vehicles/Details/5
@@ -40,6 +41,7 @@ namespace Chatbot.Controllers
         // GET: Vehicles/Create
         public ActionResult Create()
         {
+            ViewBag.PathId = new SelectList(db.Paths, "Id", "Start");
             return View();
         }
 
@@ -48,7 +50,7 @@ namespace Chatbot.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Type,CompanyName,concessionary")] Vehicle vehicle)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Type,CompanyName,PathId")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {
@@ -57,6 +59,7 @@ namespace Chatbot.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.PathId = new SelectList(db.Paths, "Id", "Start", vehicle.PathId);
             return View(vehicle);
         }
 
@@ -72,6 +75,7 @@ namespace Chatbot.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.PathId = new SelectList(db.Paths, "Id", "Start", vehicle.PathId);
             return View(vehicle);
         }
 
@@ -80,7 +84,7 @@ namespace Chatbot.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Type,CompanyName,concessionary")] Vehicle vehicle)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Type,CompanyName,PathId")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {
@@ -88,6 +92,7 @@ namespace Chatbot.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+            ViewBag.PathId = new SelectList(db.Paths, "Id", "Start", vehicle.PathId);
             return View(vehicle);
         }
 

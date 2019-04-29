@@ -10,6 +10,7 @@ namespace Chatbot.Models
         public string  Start { get; set; }
         public string  End { get; set; }
         public double  Distance { get; set; }
-        public virtual ICollection<Stop> Stops { get; set; }
+       // public virtual ICollection<Stop> Stops { get; set; }
+      //  public virtual ICollection<Vehicle> Vehicles { get; set; }
     }
 }

@@ -40,7 +40,9 @@ namespace Chatbot.Controllers
         // GET: Facts/Create
         public ActionResult Create()
         {
-            return View();
+            var fact = new Fact();
+            fact.Name = string.Format("FV{0}", db.Facts == null ? 1 : db.Facts.ToList().Max(f => f.Id));
+            return View(fact);
         }
 
         // POST: Facts/Create
@@ -48,7 +50,7 @@ namespace Chatbot.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Question")] Fact fact)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name,Question")] Fact fact)
         {
             if (ModelState.IsValid)
             {
@@ -80,7 +82,7 @@ namespace Chatbot.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Question")] Fact fact)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Question")] Fact fact)
         {
             if (ModelState.IsValid)
             {

@@ -10,9 +10,8 @@ namespace Chatbot.Models
         public int Id { get; set; }
         public string Type { get; set; }
         public string CompanyName { get; set; }
-        public string concessionary { get; set; }
+        public int PathId { get; set; }
+        public virtual Path Path { get; set; }
 
-        public virtual ICollection<Role> Roles { get; set; }
-        public virtual ICollection<Stop> Stops { get; set; }
     } 
 }
