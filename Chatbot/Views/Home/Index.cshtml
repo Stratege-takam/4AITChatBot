@@ -1,48 +1,57 @@
-﻿@model Chatbot.Models.SE.Response
+﻿@model Chatbot.Models.Response
 
-@{
-    ViewBag.Title = "Home Page";
-}
-<div class="row main d-flex justify-content-center mt-5" >
-    
-    <div class="col-12 col-md-9 main_1">
-        <div class="card main_2 border-0">
-            <div class="card-header p-0 border-0">
-                <form class="" method="post">
-                    <div class="input-group">
-                        @Html.EditorFor(model=> model.Search ,
-                           new {
-                               htmlAttributes = new
-                               {
-                                   @class = "form-control",
-                                   @placeholder = "Entrer l'element à rechercher",
-                                   @aria_label = "element à rechercher",
-                                   @aria_describedby = "basic-addon2"
-                               }
-                           })
-
-                        <div class="input-group-append">
-                            <button type="submit" class="input-group-text btn btn-primary bg-primary text-white" id="basic-addon2"> Rechercher</button>
-                        </div>
-                    </div>
-                </form>
+<div class="row mt-5">
+    <div class="card border-0 chatbot">
+        <div class=" text-center card-header bg-primary text-white d-flex flex-row">
+            <div>
+                Travel ChatBot
             </div>
-            @if (Model!=null && Model.results !=null)
+            <div class="custom-control custom-checkbox ml-auto">
+                <input type="checkbox" class="custom-control-input" data-action="@Url.Action("ReadAudio","Home",new { })" id="chatBotPlay">
+                <label class="custom-control-label" for="chatBotPlay">lecteur audio</label>
+            </div>
+           
+        </div>
+        <div class="card-body chatbot_body p-2" id="chatbot_body">
+            @Html.Action("ChatBody", "Home", new { })
+        </div>
+        <div class="card-footer  p-0 bg-white border-0">
+           
+            @using (Html.BeginForm(actionName: "ChatBody",
+                controllerName: "Home", method: FormMethod.Post,
+                routeValues: new {}, htmlAttributes: new { @id = "chatbotForm" }
+                ))
             {
-                <div class="card-body mt-0 ">
+                @Html.AntiForgeryToken()
 
-                    <div class="row">
-                        <div class="col-12">
-                            @foreach (var item in Model.results)
-                            {
-                                <p>
-                                    @item
-                                </p>
-                            }
-                        </div>
+                <div class="input-group ">
+                    @Html.EditorFor(model => model.Search, new {
+                   htmlAttributes = new { @class = "form-control",
+                       @type = "search",
+                       @id = "chatbotSearch",
+                       @placeholder = "Saisisez l'objet de votre préocupation",
+                       @list = "chatbotChoice",
+                       @aria_label = "Chatbot",
+                       @aria_describedby = "basic-addon2",
+                       @autocomplete = "off"
+                   } })
+
+                    <datalist id="chatbotChoice">
+                        @foreach (var item in Model.travelHelps)
+                        {
+                            <option value="@item.Key" />
+                        }
+                    </datalist>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary border-0 " id="chatbotBtn" type="button">Envoyer</button>
                     </div>
                 </div>
             }
+
         </div>
     </div>
 </div>
+
+@section scripts{
+    <script src="~/Scripts/ChatScript.js"></script>
+}

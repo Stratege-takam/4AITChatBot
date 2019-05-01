@@ -1,0 +1,71 @@
+﻿@model List<Chatbot.Models.Response>
+
+@{ 
+    Layout = null;
+}
+<div class="row  p-4 d-flex">
+
+    @if (Model != null && Model.Count > 0)
+    {
+        foreach (var item in Model)
+        {
+            if (item.BotBegin)
+            {
+                if (item.Value != null)
+                {
+                    <div class="alert alert-info col-10 chatItem">
+                        @if (item.Key != null)
+                        {
+                            <div class="alert alert-secondary">
+                                @Html.Raw(item.Key)
+                            </div>
+                        }
+                        <span>
+                            @Html.Raw(item.Value)
+                        </span>
+                    </div>
+                }
+
+                if (item.Search != null)
+                {
+                    <div class="alert alert-secondary chatItem col-10 ml-auto">
+                        <span>
+                            @Html.Raw(item.Search)
+                        </span>
+                    </div>
+                }
+            }
+            else
+            {
+
+                if (item.Search != null)
+                {
+                    <div class="alert alert-secondary chatItem col-10 ml-auto">
+                        <span>
+                            @Html.Raw(item.Search)
+                        </span>
+                    </div>
+                }
+
+                if (item.Value != null)
+                {
+                    <div class="alert alert-info col-10 chatItem">
+                        @if (item.Key != null)
+                        {
+                            <div class="alert alert-secondary">
+                                @Html.Raw(item.Key)
+                            </div>
+                        }
+                        <span>
+                            @Html.Raw(item.Value)
+                        </span>
+                    </div>
+                }
+
+
+            }
+
+
+        }
+    }
+</div>

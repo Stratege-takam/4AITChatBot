@@ -11,12 +11,11 @@ namespace Chatbot.Models
     {
         [Key]
         public int Id { get; set; }
-        public int TransportId { get; set; }
-        public virtual Vehicle Transport { get; set; }
-        [NotMapped]
-        public int ParticipantCount { get; set; }
-        public DateTime TravelStart { get; set; }
-        public DateTime TravelEnd { get; set; }
-        //public virtual ICollection<Reservation> Reservations { get; set; }
+        public string Path { get; set; }
+        public DateTime Schedule { get; set; }
+        public string Stop { get; set; }
+        public double Price { get; set; }
+        public string TypeOfTravel { get; set; }
+        public string Dock { get; set; }
     }
 }

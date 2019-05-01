@@ -22,15 +22,7 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="@Url.Action("Index", "Home")">Accueil <span class="sr-only">(current)</span></a>
                 </li>
-                <li>@Html.ActionLink(linkText: "Diagnostics", actionName: "Index", controllerName: "Diagnostics", routeValues: new { }, htmlAttributes: new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink(linkText: "Facts", actionName: "Index", controllerName: "Facts", routeValues: new { }, htmlAttributes: new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink(linkText: "Rules", actionName: "Index", controllerName: "Rules", routeValues: new { }, htmlAttributes: new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink(linkText: "RuleFact", actionName: "Index", controllerName: "RuleFacts", routeValues: new { }, htmlAttributes: new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink(linkText: "Vehicles", actionName: "Index", controllerName: "Vehicles", routeValues: new { }, htmlAttributes: new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink(linkText: "Paths", actionName: "Index", controllerName: "Paths", routeValues: new { }, htmlAttributes: new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink(linkText: "Stops", actionName: "Index", controllerName: "Stops", routeValues: new { }, htmlAttributes: new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink(linkText: "Travels", actionName: "Index", controllerName: "Travels", routeValues: new { }, htmlAttributes: new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink(linkText: "Reservations", actionName: "Index", controllerName: "Reservations", routeValues: new { }, htmlAttributes: new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink(linkText: "Faire communiquer deux machines", actionName: "Chat", controllerName: "Home", routeValues: new { }, htmlAttributes: new { @class = "nav-link" })</li>
             </ul>
         </div>
     </nav>
@@ -41,7 +33,7 @@
         </div>
     </div>
 
-
+   
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

@@ -6,11 +6,14 @@ using System.Web;
 
 namespace Chatbot.Models
 {
-    public class TravelHelp
+    public class Response
     {
-        [Key]
-        public int Id { get; set; }
         public string Key { get; set; }
         public string Value { get; set; }
+        public string Search { get; set; }
+
+        public bool BotBegin { get; set; } = false;
+
+        public List<TravelHelp> travelHelps { get; set; } = new List<TravelHelp>();
     }
 }
