@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Speech.Synthesis;
+using System.Net;
+using System.Collections.Specialized;
 
 namespace Chatbot.Controllers
 {
@@ -29,8 +31,7 @@ namespace Chatbot.Controllers
 
                 ViewBag.Message = ex.Message;
             }
-
-          
+            
             return View(response);
         }
 
@@ -87,6 +88,8 @@ namespace Chatbot.Controllers
                 }
             }
 
+            //enlever tous les reponses qui n'ont pas de valeur
+            l = l.Where(f => !string.IsNullOrEmpty(f.Value)).ToList();
 
             //indisponibilité de la reponse
             if (l.Count == 0)
@@ -126,9 +129,12 @@ namespace Chatbot.Controllers
 
                 }
 
+
+
+
                 if (l.Count>0)
                 {
-                    //Il est propable que le fait (question)  qui contient plus de mot de l'utilisateur
+                    //Il est propable que le fait (question)  qui contient plus de mots de l'utilisateur
                     // soit la question que  l'utilisateur souhaite poser
                     var travel = l.OrderByDescending(f => f.Id).FirstOrDefault();
                     response = response = new Response()
@@ -142,6 +148,9 @@ namespace Chatbot.Controllers
                 }
                 else
                 {
+                    //aucune reponse trouvé il n'y a aucun fait qui correspond 
+                    // à la question de l'utilisateur
+
                     System.Threading.Thread.Sleep(500);
                     response = new Response()
                     {
@@ -151,6 +160,26 @@ namespace Chatbot.Controllers
                         Search = search
                     };
                     listResponse.Add(response);
+
+                    string uriString = "http://www.google.com/search";
+
+                    WebClient webClient = new WebClient();
+
+                    NameValueCollection nameValueCollection = new NameValueCollection();
+                    nameValueCollection.Add("q", search);
+
+                    webClient.QueryString.Add(nameValueCollection);
+                   var  val = webClient.DownloadString(uriString);
+
+                    //ajouter le fait dans la bd 
+                    var tHp = new TravelHelp()
+                    {
+                         Key = search,
+                         Value = val
+                    };
+                    db.TravelHelps.Add(tHp);
+                    db.SaveChanges();
+                    list = db.TravelHelps.ToList().Where(f => !string.IsNullOrEmpty(f.Key)).OrderBy(f => f.Key).ToList();
                 }
             }
             else
@@ -171,6 +200,7 @@ namespace Chatbot.Controllers
                 else
                 {
                     var alea = new Random();
+                    
                     var travelhelp = l[alea.Next(0,l.Count)];
                     response = new Response()
                     {

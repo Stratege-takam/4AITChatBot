@@ -72,5 +72,7 @@ ul li a{
 }
 .chatItem {
     border-radius: 2em;
+    max-width: 100%;
+    text-wrap:normal;
 }
 
