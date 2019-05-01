@@ -200,7 +200,7 @@ namespace Chatbot.Controllers
                 else
                 {
                     var alea = new Random();
-                    
+                    l = l.Where(f => !f.Value.ToString().ToLower().Contains("html")).ToList();
                     var travelhelp = l[alea.Next(0,l.Count)];
                     response = new Response()
                     {

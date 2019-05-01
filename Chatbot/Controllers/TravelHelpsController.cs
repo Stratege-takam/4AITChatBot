@@ -163,6 +163,41 @@ namespace Chatbot.Controllers
             {
                new TravelHelp()
                {
+                   Key="Bonjour",
+                   Value="Bonjour comment puis-je vous aider ?",
+               } ,
+               new TravelHelp()
+               {
+                   Key="Bonsoir",
+                   Value="Bonsoir comment puis-je vous aider ?",
+               } ,
+                new TravelHelp()
+               {
+                   Key="Hello",
+                   Value="Hello comment puis-je vous aider ?",
+               } ,
+                 new TravelHelp()
+               {
+                   Key="Hi",
+                   Value="Hi comment puis-je vous aider ?",
+               } ,
+               new TravelHelp()
+               {
+                   Key="Bonne nuit",
+                   Value="Bonne nuit à vous",
+               } ,
+                new TravelHelp()
+               {
+                   Key="A plus",
+                   Value="A plus",
+               } ,
+               new TravelHelp()
+               {
+                   Key="Au revoir",
+                   Value="Au revoir !",
+               } ,
+               new TravelHelp()
+               {
                    Key="Combien de temps à l'avance dois-je rester à l'arrêt ?",
                    Value="Le bus ou le tram peut parfois être un peu en avance. C'est pourquoi nous vous recommandons " +
                    "d'arriver à l'arrêt cinq minutes avant l'heure de passage.",
