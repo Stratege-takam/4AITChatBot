@@ -8,10 +8,16 @@ namespace Chatbot
 {
     public class ChatbotHub : Hub
     {
-        public void Send(string search)
+        public void SendClient(string question)
         {
-            // Call the recieveNewMessage method to update clients.
-            Clients.Others.recieveNewResponse(search);
+            // Call the recieveServer method to update clients.
+            Clients.Others.recieveServer(question);
+        }
+
+        public void SendServer(bool singleMessage , string response)
+        {
+            // Call the recieveClient method to update clients.
+            Clients.All.recieveClientAndServer(singleMessage,response);
         }
 
         public void RoleOfComputer(bool isServer)

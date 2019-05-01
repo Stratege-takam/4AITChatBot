@@ -1,0 +1,21 @@
+﻿
+@model Chatbot.Models.Response
+
+@{
+    Layout = null;
+}
+<div class="row  p-4 d-flex">
+
+    @if (Model != null)
+    {
+
+        if (Model.Search != null)
+        {
+            <div class="alert alert-info chatItem col-10 ">
+                <span>
+                    @Html.Raw(Model.Search)
+                </span>
+            </div>
+        }
+    }
+</div>

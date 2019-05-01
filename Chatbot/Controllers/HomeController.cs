@@ -21,7 +21,7 @@ namespace Chatbot.Controllers
             Response response = new Response();
             try
             {
-                list = db.TravelHelps.ToList().Where(f => !string.IsNullOrEmpty(f.Key)).ToList();
+                list = db.TravelHelps.ToList().Where(f => !string.IsNullOrEmpty(f.Key)).OrderBy(f => f.Key).ToList();
                 response.travelHelps = list;
             }
             catch (Exception ex)
@@ -209,6 +209,56 @@ namespace Chatbot.Controllers
            
         }
 
+        //le client utilise cette methode
+        [HttpPost]
+        public JsonResult GenerateQuestion(Response response)
+        {
+            try
+            {
+                list = list.Count> 0? list : db.TravelHelps.ToList().Where(f => !string.IsNullOrEmpty(f.Key)).OrderBy(f=> f.Key).ToList();
+                System.Threading.Thread.Sleep(500);
+                var nber = (new Random()).Next(0, list.Count);
+                var travelhelp = list[nber];
+                response = new Response()
+                {
+                    Key = travelhelp.Key,
+                };
+            }
+            catch (Exception ex)
+            {
+
+                ViewBag.Message = ex.Message;
+            }
+
+
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult PreChatBot(Response response)
+        {
+            try
+            {
+                var search = Request.Form["search"];
+
+                if (!string.IsNullOrEmpty(search))
+                {
+                    response =new Response() {
+                         Search = search,
+                          Value = "icon"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+
+                ViewBag.Message = ex.Message;
+            }
+
+            return View(response);
+
+        }
+
         [HttpPost]
         public async Task<JsonResult> ReadAudio(Response response)
         {
@@ -233,9 +283,35 @@ namespace Chatbot.Controllers
                 ViewBag.Message = ex.Message;
             }
 
-            
+
             return await task;
         }
+
+
+        [HttpPost]
+        public ActionResult SingleChatBot(Response response)
+        {
+            try
+            {
+                var search = Request.Form["search"];
+                response = new Response()
+                {
+                    Search = search
+                };
+            }
+            catch (Exception ex)
+            {
+
+                ViewBag.Message = ex.Message;
+            }
+
+            return View(response);
+
+        }
+
+     
+      
+
         public  List<string> SplitPhrase( string search)
         {
             var param = new char[] { ' ', ',', ';', '!', '?', '.' };

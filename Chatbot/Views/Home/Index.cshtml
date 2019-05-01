@@ -24,7 +24,9 @@
             {
                 @Html.AntiForgeryToken()
 
+                
                 <div class="input-group ">
+                    <input type="hidden" id="ChatbotPreMessage" name="ChatbotPreMessage" value="@Url.Action("PreChatBot","Home",new { })" />
                     @Html.EditorFor(model => model.Search, new {
                    htmlAttributes = new { @class = "form-control",
                        @type = "search",
@@ -37,10 +39,10 @@
                    } })
 
                     <datalist id="chatbotChoice">
-                        @foreach (var item in Model.travelHelps)
+                        @*@foreach (var item in Model.travelHelps)
                         {
                             <option value="@item.Key" />
-                        }
+                        }*@
                     </datalist>
                     <div class="input-group-append">
                         <button class="btn btn-primary border-0 " id="chatbotBtn" type="button">Envoyer</button>

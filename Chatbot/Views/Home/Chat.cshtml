@@ -5,10 +5,14 @@
         <div class=" text-center card-header bg-primary text-white d-flex flex-row">
             <div>
                 Travel ChatBot
+
+
             </div>
             <div class="custom-control custom-checkbox ml-auto">
-                <input type="checkbox" class="custom-control-input" data-action="@Url.Action("ReadAudio","Home",new { })" id="chatBotPlay">
-                <label class="custom-control-label" for="chatBotPlay">lecteur audio</label>
+                <input type="checkbox" class="" name="chatBotClient" data-action="@Url.Action("SingleChatBot","Home",new { })" value="@Url.Action("GenerateQuestion","Home",new { })" id="chatBotClient" />
+                <!----input type="checkbox"  class="custom-control-input" -->
+                <label class="" for="chatBotPlay">Client </label>
+                <!--custom-control-label-->
             </div>
 
         </div>
@@ -22,8 +26,9 @@
                 routeValues: new { }, htmlAttributes: new { @id = "chatbotForm" }
                 ))
             {
-                @Html.AntiForgeryToken()
 
+                @Html.AntiForgeryToken()
+                <input type="hidden" id="ChatbotPreMessage" name="ChatbotPreMessage" value="@Url.Action("PreChatBot","Home",new { })" />
                 <div class="input-group ">
                     @Html.EditorFor(model => model.Search, new {
                    htmlAttributes = new { @class = "form-control",
@@ -38,15 +43,25 @@
                    } })
 
                     <datalist id="chatbotChoice">
-                        @foreach (var item in Model.travelHelps)
-                        {
-                            <option value="@item.Key" />
-                        }
+                        @*@foreach (var item in Model.travelHelps)
+            {
+                <option value="@item.Key" />
+            }*@
                     </datalist>
                     <div class="input-group-append">
-                        <button class="btn btn-primary border-0 " id="chatbotBtn" type="button">Envoyer</button>
+                        <button disabled class="btn btn-primary border-0 " id="chatbotBtn" type="button">Envoyer</button>
                     </div>
+                    <div class="ChatResponse" style="display:none;">
+
+                    </div>
+                    <div class="ChatResponseSingle" style="display:none;">
+
+                    </div>
+                    <input type="hidden" id="ChatSetValue" name="ChatSetValue" value="" />
                 </div>
+
+             
+             
             }
 
         </div>

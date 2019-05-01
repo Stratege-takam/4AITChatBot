@@ -1,0 +1,50 @@
+﻿
+@model Chatbot.Models.Response
+
+@{
+    Layout = null;
+}
+<div class="row  p-4 d-flex preMessage">
+
+    @if (Model != null)
+    {
+
+       
+            if (Model.Search != null)
+            {
+                <div class="alert   alert-info  chatItem  col-10">
+                    <span>
+                        @Html.Raw(Model.Search)
+                    </span>
+                </div>
+            }
+
+            if (Model.Value != null)
+            {
+                if (Model.Value == "icon")
+                {
+                    <div class="col-10 chatItem">
+                        <img src="~/Content/img/typingo.gif" height="150" />
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-secondary chatItem col-10 ml-auto">
+                        @if (Model.Key != null)
+                        {
+                            <div class="alert alert-secondary">
+                                @Html.Raw(Model.Key)
+                            </div>
+                        }
+                        <span>
+                            @Html.Raw(Model.Value)
+                        </span>
+                    </div>
+                }
+
+            }
+
+     }
+
+    
+</div>

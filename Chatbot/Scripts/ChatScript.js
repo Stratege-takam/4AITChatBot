@@ -6,6 +6,7 @@
         this.search = $("#chatbotSearch");
         this.formajax = $("#chatbotForm");
         this.audioplays = $("#chatBotPlay");
+        this.ChatbotPreMessage = $("#ChatbotPreMessage");
         this.formjs = document.getElementById("chatbotForm");
     }
 }
@@ -25,19 +26,31 @@ $(function () {
     //click
     chatBot.btn.click(function (e) {
         e.preventDefault();
-        post(chatBot.formajax, {search: chatBot.search.val()}, function (result) {
-            //console.log("success", result);
-            chatBot.body.html(result);
-        }, null, function (result) {
-            chatBot.search.val(null);
+
+        post(chatBot.formajax, { search: chatBot.search.val() }, function (data) {
+            chatBot.body.append(data);
             scrollBody();
-            if (play) {
-                var reponse = $(".chatItem span ").last().html();
-                post(chatBot.formajax, { text: reponse }, function (param) { },chatBot.audioplays.data("action"), function (param) {
-                    console.log(param);
+            //console.log(data);
+            setTimeout(function () {
+                post(chatBot.formajax, { search: chatBot.search.val() }, function (result) {
+                    //console.log("success", result);
+                    chatBot.body.html(result);
+                }, null, function (result) {
+                    chatBot.search.val(null);
+                    scrollBody();
+                    if (play) {
+                        var reponse = $(".chatItem span ").last().html();
+                        post(chatBot.formajax, { text: reponse }, function (param) { }, chatBot.audioplays.data("action"), function (param) {
+                            console.log(param);
+                        });
+                    }
                 });
-            }
+            }, 2000);
+
+        }, chatBot.ChatbotPreMessage.val(), function (data) {
+            
         });
+
     });
 
     //saisir 
@@ -58,8 +71,6 @@ $(function () {
         form = form[0];
         // $.validator.unobtrusive.parse(form);
        // console.log(form);
-       
-        console.log(data);
 
         var ajaxConf = {
             type: 'POST',

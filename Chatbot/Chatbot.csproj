@@ -212,6 +212,10 @@
     <Content Include="Content\img\blockchain-transport.jpg" />
     <Content Include="Content\img\DXn1eGPXUAEQH9z.jpg" />
     <Content Include="Content\img\intelligence-artificielle.jpg" />
+    <Content Include="Content\img\typing.gif" />
+    <Content Include="Content\img\typing1.png" />
+    <Content Include="Content\img\typing2.gif" />
+    <Content Include="Content\img\typingo.gif" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -219,6 +223,7 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\BotScript.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -292,6 +297,8 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\ChatBody.cshtml" />
+    <Content Include="Views\Home\PreChatBot.cshtml" />
+    <Content Include="Views\Home\SingleChatBot.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

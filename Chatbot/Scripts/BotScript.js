@@ -1,66 +1,158 @@
 ﻿class ChatBot {
     constructor() {
         this.btn = $("#chatbotBtn");
+        this.setValue = $("#ChatSetValue");
         this.body = $("#chatbot_body");
         this.choose = $("#chatbotChoice");
         this.search = $("#chatbotSearch");
         this.formajax = $("#chatbotForm");
-        this.audioplays = $("#chatBotPlay");
+        this.clientChat = $("#chatBotClient");
+        this.response = $("#ChatResponse");
+        this.responseSingle = $("#ChatResponseSingle");
+        this.ChatbotPreMessage = $("#ChatbotPreMessage");
         this.formjs = document.getElementById("chatbotForm");
     }
 }
-
 $(function () {
 
     var chatBot = new ChatBot();
-    var play = false;
+    var client = false;
+    var begin = false;
+    var resultSigne = null;
     scrollBody();
     chatBot.search.focus();
 
-    //lorsque l'etat du check change, 
-    chatBot.audioplays.change(function () {
-        play = chatBot.audioplays.is(":checked");
+   
+    var chat = $.connection.chatbotHub;
+
+
+    //reception de la reponse par les deux parties 
+    chat.client.recieveClientAndServer = function (singleMessage, response) {
+        if (singleMessage) {
+            // cas du single message 
+            //chatBot.body.append(response);
+        }
+        else {
+            //cas de plusieurs messages
+            chatBot.body.html(response);
+        }
+        scrollBody();
+    }
+
+     // serveur reçoit la question en provenance du client
+    chat.client.recieveServer = function (question) {
+        //console.log("question", question);
+        post(chatBot.formajax, { search: question }, function (data) {
+            chatBot.body.append(data);
+            //chatBot.response.html("");
+           // console.log(data);
+            resultSigne = data;
+            resultAll = null;
+            //Si le message est recu alors on va declancher l'evement du click pour envoyer le 
+            // resultat aux deux parties
+           // chatBot.btn.trigger("click");
+            scrollBody();
+            setTimeout(function () {
+                post(chatBot.formajax, { search: question }, function (result) {
+                  
+                    resultSigne = null;
+                    resultAll = result;
+                    //chatBot.btn.attr("disabled", false);
+                    //Si le message est recu alors on va declancher l'evement du click pour envoyer le 
+                    // resultat aux deux parties
+                    chatBot.btn.trigger("click");
+                }, null, function (result) {
+                    chatBot.search.val(null);
+                    scrollBody();
+
+                    
+                });
+            }, 3000);
+
+        }, chatBot.ChatbotPreMessage.val(), function (data) {
+
+        });
+    }
+
+    // demarer la connexion
+    $.connection.hub.start().done(function () {
+
+
+        chatBot.btn.click(function () {
+            if (resultSigne !== null) {
+                // cas du single message 
+                chat.server.sendServer(true, resultSigne);
+            }
+            if (resultAll !== null) {
+                //cas de plusieurs messages
+                chat.server.sendServer(false, resultAll);
+            }
+            //chatBot.btn.attr("disabled", true);
+        });
+
+        //lorsque l'etat du check change, 
+        chatBot.clientChat.change(function () {
+            client = chatBot.clientChat.is(":checked");
+            //alert(client);
+            //permet de declacher l'action d'envoi du message 
+            begin = client;
+            if (client) {
+                GenerateQuestion();
+            }
+            var time = setInterval(function () {
+                if (client) {
+                    GenerateQuestion();
+                }
+                else {
+                    clearInterval(time);
+                }
+                }, 10000);
+        });
+        
+
     });
 
-    //click
-    chatBot.btn.click(function (e) {
-        e.preventDefault();
-        post(chatBot.formajax, {search: chatBot.search.val()}, function (result) {
-            //console.log("success", result);
-            chatBot.body.html(result);
-        }, null, function (result) {
+
+    function GenerateQuestion() {
+        // il doit generer une question
+        post(chatBot.formajax, { search: null }, function (response) {
+            //la question est générée
+            //console.log(response);
+            var question = response.Key;
+
+
+
+            //modifier le texte du client
+            post(chatBot.formajax, { search: question }, function (response) {
+                console.log(response);
+                chatBot.body.append(response);
+            }, chatBot.clientChat.data("action"), function (result) {
+                scrollBody();
+            });
+
+
+
+            //envoyer la question au serveur 
+            chat.server.sendClient(question);
+
+        }, chatBot.clientChat.val(), function (response) {
             chatBot.search.val(null);
             scrollBody();
-            if (play) {
-                var reponse = $(".chatItem span ").last().html();
-                post(chatBot.formajax, { text: reponse }, function (param) { },chatBot.audioplays.data("action"), function (param) {
-                    console.log(param);
-                });
-            }
         });
-    });
+    }
 
-    //saisir 
-    chatBot.search.keydown(function (e) {
-        // si on click sur la touche entré
-        if (e.keyCode === 13) {
-            e.preventDefault();
-            chatBot.btn.trigger("click");
-        }
-    });
+
+   
 
     function scrollBody() {
         chatBot.body.scrollTop(chatBot.body.prop('scrollHeight'));
     }
-
 
     function post(form,data, callback, action = null, completeCallback = null) {
         form = form[0];
         // $.validator.unobtrusive.parse(form);
        // console.log(form);
        
-        console.log(data);
-
         var ajaxConf = {
             type: 'POST',
             url: action === null ? form.action : action,
@@ -118,33 +210,5 @@ $(function () {
 
 
 
-
-    // Reference the auto-generated proxy for the hub.
-    var chat = $.connection.chatbotHub;
-    // Create a function that the hub can call back to display messages.
-    chat.client.addNewMessageToPage = function (name, message) {
-        // Add the message to the page.
-        $('#discussion').append('<li><strong>' + htmlEncode(name)
-            + '</strong>: ' + htmlEncode(message) + '</li>');
-    };
-    // Get the user name and store it to prepend to messages.
-    $('#displayname').val(prompt('Enter your name:', ''));
-    // Set initial focus to message input box.
-    $('#message').focus();
-    // Start the connection.
-    $.connection.hub.start().done(function () {
-        $('#sendmessage').click(function () {
-            // Call the Send method on the hub.
-            chat.server.send($('#displayname').val(), $('#message').val());
-            // Clear text box and reset focus for next comment.
-            $('#message').val('').focus();
-        });
-    });
-});
-// This optional function html-encodes messages for display in the page.
-function htmlEncode(value) {
-    var encodedValue = $('<div />').text(value).html();
-    return encodedValue;
-}
 
 });
