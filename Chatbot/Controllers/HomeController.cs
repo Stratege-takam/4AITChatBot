@@ -170,12 +170,14 @@ namespace Chatbot.Controllers
 
                     webClient.QueryString.Add(nameValueCollection);
                    var  val = webClient.DownloadString(uriString);
-
+                    var link = $"https://www.google.com/search?q={search}";
+                    var proposition = $"Je vous recommende ce lien" +
+                        $"<a href='{link}' target='_blank' > {search} </a>";
                     //ajouter le fait dans la bd 
                     var tHp = new TravelHelp()
                     {
                          Key = search,
-                         Value = val
+                         Value = proposition
                     };
                     db.TravelHelps.Add(tHp);
                     db.SaveChanges();

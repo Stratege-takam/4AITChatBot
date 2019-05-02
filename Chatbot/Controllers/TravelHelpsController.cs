@@ -25,8 +25,8 @@ namespace Chatbot.Controllers
             //    db.TravelHelps.Add(item);
             //    db.SaveChanges();
             //}
-            //var sh = @"D:\M.Sc.1\4AIT\projet\Chatbot\Chatbot\Content\data\reservation.txt";
-            //var path = Server.MapPath("~/Content/data/texte.txt");
+            ////var sh = @"D:\M.Sc.1\4AIT\projet\Chatbot\Chatbot\Content\data\reservation.txt";
+            //var path = Server.MapPath("~/Content/data/reservation.txt");
             //var lines = System.IO.File.ReadLines(path);
             //foreach (var item in lines)
             //{
@@ -38,8 +38,20 @@ namespace Chatbot.Controllers
             //    });
             //    db.SaveChanges();
             //}
-            // path = Server.MapPath("~/Content/data/TransportRutier.txt");
+            // path = Server.MapPath("~/Content/data/texte.txt");
             // lines = System.IO.File.ReadLines(path);
+            //foreach (var item in lines)
+            //{
+            //    var elt = item.Split(':');
+            //    db.TravelHelps.Add(new TravelHelp()
+            //    {
+            //        Key = elt.First(),
+            //        Value = elt.Last()
+            //    });
+            //    db.SaveChanges();
+            //}
+            //path = Server.MapPath("~/Content/data/TransportRutier.txt");
+            //lines = System.IO.File.ReadLines(path);
             //foreach (var item in lines)
             //{
             //    var elt = item.Split(':');

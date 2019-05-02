@@ -94,8 +94,7 @@ $(function () {
         chatBot.clientChat.change(function () {
             client = chatBot.clientChat.is(":checked");
             //alert(client);
-            //permet de declacher l'action d'envoi du message 
-            begin = client;
+            
             if (client) {
                 GenerateQuestion();
             }
