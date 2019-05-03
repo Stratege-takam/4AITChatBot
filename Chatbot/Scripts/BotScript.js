@@ -41,11 +41,8 @@ $(function () {
 
      // serveur reçoit la question en provenance du client
     chat.client.recieveServer = function (question) {
-        //console.log("question", question);
         post(chatBot.formajax, { search: question }, function (data) {
             chatBot.body.append(data);
-            //chatBot.response.html("");
-           // console.log(data);
             resultSigne = data;
             resultAll = null;
             //Si le message est recu alors on va declancher l'evement du click pour envoyer le 

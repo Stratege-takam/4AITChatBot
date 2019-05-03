@@ -58,8 +58,7 @@ namespace Chatbot.Controllers
 
             var search1 = search.ToLower().Trim();
             var l = list.Where(f => f.Key.ToLower().Trim().Contains(search1)).ToList();
-            // ||
-          //  search1.Contains(f.Key.ToLower().Trim())
+         
             bool istrue = false;
 
             string competence = null;
